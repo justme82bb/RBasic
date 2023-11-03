@@ -1,0 +1,227 @@
+> #a  Do zmiennej a podstaw wartosc wyrazenia 4 ∗ sin(pi). Do zmiennej b podstaw potrojna˛ wartosc zmiennej a. Wywolaj funkcje˛ sprawdzajaca, ktora z wartosci zmiennych jest wieksza.
+> a = 4 * sin(pi)
+> b = 3 * a
+> max (a,b)
+[1] 1.469528e-15
+> #b  Uruchom i poczytaj dokumentacje dla funkcji max()
+> help (max)
+> wektor = (90:115)
+> wektor = wektor^2
+> average = mean (wektor)
+> apropos ("max")
+ [1] "cummax"       "max"          "max.col"      "mem.maxNSize" "mem.maxVSize" "pmax"        
+ [7] "pmax.int"     "promax"       "unit.pmax"    "varimax"      "which.max"   
+> setwd ("C:/Users/ljsiw/Documents/ubb/apu/RBasics")
+> a = "lodówka z największą pojemnością"
+> save (a, file="a.RData")
+> rm (a)
+> a
+BŁĄD: nie znaleziono obiektu 'a'
+> load (file="a.Rdata")
+> a
+[1] "lodówka z największą pojemnością"
+> library(gridExtra)
+> library(grid)
+> tabela = tableGrob (rivers[1:10])
+> grid.draw(tabela)
+> #g  Stworz wektor zawierajacy ciag liczb 1000, 998,996,. . . 850.
+> wektor = seq(1000,850, by = -2)
+> a = (30:5)
+> b = (11:23)
+> d = c(b,a)
+> print (d)
+ [1] 11 12 13 14 15 16 17 18 19 20 21 22 23 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14
+[31] 13 12 11 10  9  8  7  6  5
+> nazwa = c("Amica FK2695", "Samsung RB34T635EBN", " Haier 3-drzwiowa HTR5719ENPT", "Sharp SJ-BA05DMXWF-EU", "LG GBB92MCACP", "Beko B3RCNA344HXB", "Samsung Bespoke RB38A7B5E22", "Amica FK2515.4UTX "," Bosch KGN49XIEA","Sharp SJ-BB05DTXLF-EU")
+> pojemnosc_uzytkowa_chlodziarki = c(161,227,310,195,277,209,276,183,330,204 )
+> pojemnosc_uzytkowa_zamrazarki = c(70,114,140,75,107,92,114,84,108,84 )
+> cena = c(1999,2599,3999,1689,3399,2099,3680,1449,3099,1449)
+> liczba_opinii = c(330,124,12,57,90,11,269,179,142,14)
+> lodowki = data.frame(nazwa,pojemnosc_uzytkowa_chlodziarki,pojemnosc_uzytkowa_zamrazarki,cena,liczba_opinii)
+> mean(lodowki$cena)
+[1] 2546.1
+> lodowki = rbind(lodowki, data.frame(nazwa ="Liebherr GKw 1455-1", pojemnosc_uzytkowa_chlodziarki=204,pojemnosc_uzytkowa_zamrazarki=84,cena=1449,liczba_opinii=14))
+> print (lodowki)
+                           nazwa pojemnosc_uzytkowa_chlodziarki pojemnosc_uzytkowa_zamrazarki
+1                   Amica FK2695                            161                            70
+2            Samsung RB34T635EBN                            227                           114
+3   Haier 3-drzwiowa HTR5719ENPT                            310                           140
+4          Sharp SJ-BA05DMXWF-EU                            195                            75
+5                  LG GBB92MCACP                            277                           107
+6              Beko B3RCNA344HXB                            209                            92
+7    Samsung Bespoke RB38A7B5E22                            276                           114
+8             Amica FK2515.4UTX                             183                            84
+9                Bosch KGN49XIEA                            330                           108
+10         Sharp SJ-BB05DTXLF-EU                            204                            84
+11           Liebherr GKw 1455-1                            204                            84
+   cena liczba_opinii
+1  1999           330
+2  2599           124
+3  3999            12
+4  1689            57
+5  3399            90
+6  2099            11
+7  3680           269
+8  1449           179
+9  3099           142
+10 1449            14
+11 1449            14
+> mean(lodowki$cena)
+[1] 2446.364
+> #punk k - co to są srednie ceny każdej oceny?? 
+> #Korzystajac z ramki danych lodowki dodaj nowa˛ kolumne˛ okreslajac ocene˛klientow. Wpisz do kolumny odpowiednio oceny w skali od 0 do 5 krok 0.5. Dodana kolumna powinna się automatycznie przekonwertowac do cech jakosciowych (tzw. factors). Wylicz srednia ceny kazdej oceny.
+> # Nowa kolumna z ocenami klientów
+> oceny_klientow <- seq(0, 5, by = 0.5)
+> # Dodawanie nowej kolumny do ramki danych
+> lodowki$oceny_klientow <- factor(rep(oceny_klientow, each = nrow(lodowki) / length(oceny_klientow)))
+> # Obliczanie średnich cen dla każdej oceny - cokolwiek to znaczy
+> srednie_ceny <- tapply(lodowki$cena, lodowki$oceny_klientow, mean)
+> # Wyświetlenie ramki danych z nową kolumną
+> print(lodowki)
+                           nazwa pojemnosc_uzytkowa_chlodziarki pojemnosc_uzytkowa_zamrazarki
+1                   Amica FK2695                            161                            70
+2            Samsung RB34T635EBN                            227                           114
+3   Haier 3-drzwiowa HTR5719ENPT                            310                           140
+4          Sharp SJ-BA05DMXWF-EU                            195                            75
+5                  LG GBB92MCACP                            277                           107
+6              Beko B3RCNA344HXB                            209                            92
+7    Samsung Bespoke RB38A7B5E22                            276                           114
+8             Amica FK2515.4UTX                             183                            84
+9                Bosch KGN49XIEA                            330                           108
+10         Sharp SJ-BB05DTXLF-EU                            204                            84
+11           Liebherr GKw 1455-1                            204                            84
+   cena liczba_opinii oceny_klientow
+1  1999           330              0
+2  2599           124            0.5
+3  3999            12              1
+4  1689            57            1.5
+5  3399            90              2
+6  2099            11            2.5
+7  3680           269              3
+8  1449           179            3.5
+9  3099           142              4
+10 1449            14            4.5
+11 1449            14              5
+> # Wyświetlenie średnich cen dla każdej oceny
+> print(srednie_ceny)
+   0  0.5    1  1.5    2  2.5    3  3.5    4  4.5    5 
+1999 2599 3999 1689 3399 2099 3680 1449 3099 1449 1449 
+> lodowki = rbind(lodowki, data.frame(nazwa ="Haier 3-drzwiowa HTW5618DNPT", pojemnosc_uzytkowa_chlodziarki=235 ,pojemnosc_uzytkowa_zamrazarki=125,cena=3479,liczba_opinii=10,oceny_klientow=4.5))
+> lodowki = rbind(lodowki, data.frame(nazwa =" Candy COHS 38FS", pojemnosc_uzytkowa_chlodziarki=90,pojemnosc_uzytkowa_zamrazarki=0,cena=749,liczba_opinii=12,oceny_klientow=4.5))
+> lodowki = rbind(lodowki, data.frame(nazwa ="Beko B5RCNA366HXB1", pojemnosc_uzytkowa_chlodziarki=210,pojemnosc_uzytkowa_zamrazarki=106,cena=2449,liczba_opinii=31,oceny_klientow=4.5))
+> lodowki = rbind(lodowki, data.frame(nazwa =" LG GBV7180CPY", pojemnosc_uzytkowa_chlodziarki=234,pojemnosc_uzytkowa_zamrazarki=110,cena=2789,liczba_opinii=19,oceny_klientow=5.0))
+> #punkt m
+> # Instalacja i załadowanie pakietu ggplot2
+> # install.packages("ggplot2")
+> library(ggplot2)
+Komunikat ostrzegawczy:
+pakiet ‘ggplot2’ został zbudowany w wersji R 4.3.2 
+> wykres_slupkowy <- ggplot(lodowki, aes(x = oceny_klientow)) +    geom_bar(fill = "blue") +   labs(title = "Liczba reprezentantów dla każdej oceny klientów", x = "Ocena klientów",        y = "Liczba reprezentantów")
+> print(wykres_slupkowy)
+> #punkt m Wykorzystujac ramke˛ danych lodowki pokaz procentowy udzial kazdej oceny przy pomocy wykresu kolowego oraz wachlarzowego.
+> # Wykres kołowy
+> wykres_kolowy <- ggplot(lodowki, aes(x = "", fill = oceny_klientow)) +   geom_bar(width = 1) +  coord_polar(theta = "y") +  labs(title = "Procentowy udział każdej oceny klientów") +
++   scale_fill_discrete(name = "Ocena klientów") +  geom_text(stat = "count", aes(label = scales::percent(..count.. / sum(..count..))),            position = position_stack(vjust = 0.5)) +  theme_void()
+> print(wykres_kolowy)
+Komunikat ostrzegawczy:
+The dot-dot notation (`..count..`) was deprecated in ggplot2 3.4.0.
+ℹ Please use `after_stat(count)` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated. 
+> # Wykres wachlarzowy
+> wykres_wachlarzowy <- ggplot(lodowki, aes(x = "", fill = oceny_klientow)) +   geom_bar(width = 1, position = "fill") +   labs(title = "Procentowy udział każdej oceny klientów", y = "Procenty") +   scale_y_continuous(labels = scales::percent_format(scale = 100))
+> print(wykres_wachlarzowy)
+> # Tworzenie nowej kolumny "status_opinii"
+> lodowki$status_opinii <- cut(lodowki$liczba_opinii, breaks = c(-Inf, 0, 50, 100, Inf), labels = c("nie ma", "mniej 50 opinii", "50-100 opinii", "więcej 100 opinii"))
+> # Przekształcenie kolumny "status_opinii" na faktor
+> lodowki$status_opinii <- factor(lodowki$status_opinii, levels = c("nie ma", "mniej 50 opinii", "50-100 opinii", "więcej 100 opinii"))
+> # Przegląd nowej ramki danych
+> print(lodowki)
+                           nazwa pojemnosc_uzytkowa_chlodziarki pojemnosc_uzytkowa_zamrazarki
+1                   Amica FK2695                            161                            70
+2            Samsung RB34T635EBN                            227                           114
+3   Haier 3-drzwiowa HTR5719ENPT                            310                           140
+4          Sharp SJ-BA05DMXWF-EU                            195                            75
+5                  LG GBB92MCACP                            277                           107
+6              Beko B3RCNA344HXB                            209                            92
+7    Samsung Bespoke RB38A7B5E22                            276                           114
+8             Amica FK2515.4UTX                             183                            84
+9                Bosch KGN49XIEA                            330                           108
+10         Sharp SJ-BB05DTXLF-EU                            204                            84
+11           Liebherr GKw 1455-1                            204                            84
+12  Haier 3-drzwiowa HTW5618DNPT                            235                           125
+13               Candy COHS 38FS                             90                             0
+14            Beko B5RCNA366HXB1                            210                           106
+15                 LG GBV7180CPY                            234                           110
+   cena liczba_opinii oceny_klientow     status_opinii
+1  1999           330              0 więcej 100 opinii
+2  2599           124            0.5 więcej 100 opinii
+3  3999            12              1   mniej 50 opinii
+4  1689            57            1.5     50-100 opinii
+5  3399            90              2     50-100 opinii
+6  2099            11            2.5   mniej 50 opinii
+7  3680           269              3 więcej 100 opinii
+8  1449           179            3.5 więcej 100 opinii
+9  3099           142              4 więcej 100 opinii
+10 1449            14            4.5   mniej 50 opinii
+11 1449            14              5   mniej 50 opinii
+12 3479            10            4.5   mniej 50 opinii
+13  749            12            4.5   mniej 50 opinii
+14 2449            31            4.5   mniej 50 opinii
+15 2789            19              5   mniej 50 opinii
+> for (i in 1:nrow(lodowki)) {
++   zdanie <- paste(lodowki$nazwa[i], "ma ocenę klientów", lodowki$oceny_klientow[i], "bo ma liczbę opinii", lodowki$liczba_opinii[i])
++   cat(zdanie, "\n")
++ }
+Amica FK2695 ma ocenę klientów 0 bo ma liczbę opinii 330 
+Samsung RB34T635EBN ma ocenę klientów 0.5 bo ma liczbę opinii 124 
+ Haier 3-drzwiowa HTR5719ENPT ma ocenę klientów 1 bo ma liczbę opinii 12 
+Sharp SJ-BA05DMXWF-EU ma ocenę klientów 1.5 bo ma liczbę opinii 57 
+LG GBB92MCACP ma ocenę klientów 2 bo ma liczbę opinii 90 
+Beko B3RCNA344HXB ma ocenę klientów 2.5 bo ma liczbę opinii 11 
+Samsung Bespoke RB38A7B5E22 ma ocenę klientów 3 bo ma liczbę opinii 269 
+Amica FK2515.4UTX  ma ocenę klientów 3.5 bo ma liczbę opinii 179 
+ Bosch KGN49XIEA ma ocenę klientów 4 bo ma liczbę opinii 142 
+Sharp SJ-BB05DTXLF-EU ma ocenę klientów 4.5 bo ma liczbę opinii 14 
+Liebherr GKw 1455-1 ma ocenę klientów 5 bo ma liczbę opinii 14 
+Haier 3-drzwiowa HTW5618DNPT ma ocenę klientów 4.5 bo ma liczbę opinii 10 
+ Candy COHS 38FS ma ocenę klientów 4.5 bo ma liczbę opinii 12 
+Beko B5RCNA366HXB1 ma ocenę klientów 4.5 bo ma liczbę opinii 31 
+ LG GBV7180CPY ma ocenę klientów 5 bo ma liczbę opinii 19 
+> #punkt p Zachowac ramk danych lodow ki w pliku .csv. Zaladowac ramke danych z pliku .csv
+> write.csv(lodowki, "lodowki.csv", row.names = FALSE)
+> lodowki_z_pliku <- read.csv("lodowki.csv")
+> # Wyświetl ramkę danych wczytaną z pliku
+> print(lodowki_z_pliku)
+                           nazwa pojemnosc_uzytkowa_chlodziarki pojemnosc_uzytkowa_zamrazarki
+1                   Amica FK2695                            161                            70
+2            Samsung RB34T635EBN                            227                           114
+3   Haier 3-drzwiowa HTR5719ENPT                            310                           140
+4          Sharp SJ-BA05DMXWF-EU                            195                            75
+5                  LG GBB92MCACP                            277                           107
+6              Beko B3RCNA344HXB                            209                            92
+7    Samsung Bespoke RB38A7B5E22                            276                           114
+8             Amica FK2515.4UTX                             183                            84
+9                Bosch KGN49XIEA                            330                           108
+10         Sharp SJ-BB05DTXLF-EU                            204                            84
+11           Liebherr GKw 1455-1                            204                            84
+12  Haier 3-drzwiowa HTW5618DNPT                            235                           125
+13               Candy COHS 38FS                             90                             0
+14            Beko B5RCNA366HXB1                            210                           106
+15                 LG GBV7180CPY                            234                           110
+   cena liczba_opinii oceny_klientow     status_opinii
+1  1999           330            0.0 więcej 100 opinii
+2  2599           124            0.5 więcej 100 opinii
+3  3999            12            1.0   mniej 50 opinii
+4  1689            57            1.5     50-100 opinii
+5  3399            90            2.0     50-100 opinii
+6  2099            11            2.5   mniej 50 opinii
+7  3680           269            3.0 więcej 100 opinii
+8  1449           179            3.5 więcej 100 opinii
+9  3099           142            4.0 więcej 100 opinii
+10 1449            14            4.5   mniej 50 opinii
+11 1449            14            5.0   mniej 50 opinii
+12 3479            10            4.5   mniej 50 opinii
+13  749            12            4.5   mniej 50 opinii
+14 2449            31            4.5   mniej 50 opinii
+15 2789            19            5.0   mniej 50 opinii
