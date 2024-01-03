@@ -14,11 +14,11 @@ average = mean (wektor)
 
 #d Wyswietl wszystkie funkcje zawierajace fraze max w swojej nazwie.
 
-apropos ("max")
+apropos ("max", mode="function")
 
 #e Ustaw dowolny katalog roboczy. Nastepnie stworz zmienna˛ a zawierajaca lancuch znakow “lodowka z najwieksza˛ pojemnoscia˛”.bZapisz zmienna a z obszaru roboczego do pliku w katalogu roboczym. Nastepnie usun zmienna a. Sprawdz wartosc zmiennej a (powinno jej brakowac). Na koncu wczytaj plik ze zmienna˛ a i sprawdz jej wartosc.
 
-setwd ("C:/Users/ljsiw/Documents/ubb/apu/R/workspace")
+setwd ("C:/Users/ljsiw/Documents/ubb/apu/RBasics")
 a = "lodówka z największą pojemnością"
 save (a, file="a.RData")
 rm (a)
@@ -27,11 +27,11 @@ load (file="a.Rdata")
 a
 
 #f  Zainstaluj i zaladuj pakiet gridExtra, ktory umozliwia m.in ladna wizualizacje danych tabelarycznych. Nastepnie przy pomocy dokumentacji pakietu znajdz funkcje do wizualizacji danych tabelarycznych. Uzyj jej na pierwszych 10 wierszach zbioru danych rivers.
-
+install.packages("gridExtra")
 library(gridExtra)
 library(grid)
-tabela = tableGrob (rivers[1:10])
-grid.draw(tabela)
+grid.table(rivers[1:10])
+
 
 #g  Stworz wektor zawierajacy ciag liczb 1000, 998,996,. . . 850.
 wektor = seq(1000,850, by = -2)
@@ -83,7 +83,7 @@ lodowki = rbind(lodowki, data.frame(nazwa =" LG GBV7180CPY", pojemnosc_uzytkowa_
 
 #punkt m
 # Instalacja i załadowanie pakietu ggplot2
-install.packages("ggplot2")
+# install.packages("ggplot2")
 library(ggplot2)
 
 # Tworzenie wykresu słupkowego
